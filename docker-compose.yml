@@ -6,6 +6,6 @@ services:
     container_name: coworking_frontend
     restart: always
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8080/api
+      NEXT_PUBLIC_API_URL:
     ports:
       - "3000:3000"
