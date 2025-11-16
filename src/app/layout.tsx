@@ -5,22 +5,19 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as JotaiProvider, useAtomValue } from "jotai";
 import { ReactNode, useState } from "react";
 import { ToastContainer } from "react-toastify";
+import { usePathname } from "next/navigation";
 import Navbar from "@/components/ui/Navbar";
 import { authTokenAtom } from "@/context/authAtom";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "@/components/AuthProvider";
 
-// 👇 Este componente maneja el layout condicional SIN usePathname
+// 👇 Este componente maneja el layout condicional
 function LayoutContent({ children }: { children: ReactNode }) {
   const token = useAtomValue(authTokenAtom);
+  const pathname = usePathname();
 
-  // 👇 FIX: evitar el bug del "undefined/" en producción
-  const isAuthPage =
-    typeof window !== "undefined" &&
-    (window.location.pathname === "/login" ||
-      window.location.pathname === "/signup");
-
-  const hideNavbar = isAuthPage || !token;
+  // Páginas donde NO debe mostrarse el Navbar
+  const hideNavbar = pathname === "/login" || pathname === "/signup" || !token;
 
   return (
     <>

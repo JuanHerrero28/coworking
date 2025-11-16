@@ -1,5 +1,6 @@
 // src/services/authService.ts
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/auth`;
+const API_URL_RE = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`;
+const API_URL_LOG = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`;
 
 export async function signup({
   nombre,
@@ -12,7 +13,7 @@ export async function signup({
   password: string;
   rol?: string;
 }) {
-  const res = await fetch(`${API_URL}/register`, {
+  const res = await fetch(`${API_URL_RE}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ nombre, email, password, rol }),
@@ -25,7 +26,7 @@ export async function signup({
 }
 
 export async function login(email: string, password: string) {
-  const res = await fetch(`${API_URL}/login`, {
+  const res = await fetch(`${API_URL_LOG}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
