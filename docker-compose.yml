@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: .
+    container_name: coworking_frontend
+    restart: always
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080/api
+    ports:
+      - "3000:3000"
