@@ -1,5 +1,5 @@
 // src/services/authService.ts
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/auth`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/auth`;
 
 export async function signup({
   nombre,

@@ -1,4 +1,4 @@
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/reservas`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/reservas`;
 
 // ✅ Crear reserva
 export async function crearReserva(

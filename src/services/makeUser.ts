@@ -1,4 +1,4 @@
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/usuarios`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/usuarios`;
 //listar usuarios
 export const getUsuarios = async (token: string) => {
     try {
