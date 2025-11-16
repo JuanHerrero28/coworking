@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/reservas";
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/reservas`;
 
 // ✅ Crear reserva
 export async function crearReserva(

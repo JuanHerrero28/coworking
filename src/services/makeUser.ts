@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:8080/api/usuarios";
-
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/usuarios`;
 //listar usuarios
 export const getUsuarios = async (token: string) => {
     try {
