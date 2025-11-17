@@ -1,7 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import Link from "next/link";
 import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
 const PRIMARY = "#a0c3ff";
@@ -44,27 +43,7 @@ const Logo = styled.h3`
   margin: 0;
 `;
 
-const NavLinks = styled.nav`
-  display: flex;
-  gap: 1.5rem;
 
-  @media (max-width: 700px) {
-    gap: 1rem;
-  }
-
-  a {
-    color: ${SUBTEXT};
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: 0.2s ease;
-
-    &:hover {
-      color: ${PRIMARY};
-      transform: translateY(-2px);
-    }
-  }
-`;
 
 const SocialIcons = styled.div`
   display: flex;
@@ -104,12 +83,7 @@ export default function Footer() {
       <TopSection>
         <Logo>Space CO</Logo>
 
-        <NavLinks>
-          <Link href="/">Inicio</Link>
-          <Link href="/coworkings">Coworkings</Link>
-          <Link href="/reservas">Reservas</Link>
-          <Link href="/contacto">Contacto</Link>
-        </NavLinks>
+       
 
         <SocialIcons>
           <FaLinkedin />
