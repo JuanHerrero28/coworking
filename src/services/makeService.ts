@@ -1,5 +1,5 @@
 // src/services/makeService.ts
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/espacios`;
+const API_URL = "https://coworking-proyect.onrender.com/api/espacios";
 
 export async function makeService(
   {

@@ -1,4 +1,4 @@
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/reservas`;
+const API_URL = "https://coworking-proyect.onrender.com/api/reservas";
 
 // ✅ Crear reserva
 export async function crearReserva(

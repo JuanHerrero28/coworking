@@ -1,4 +1,4 @@
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/usuarios`;
+const API_URL = "https://coworking-proyect.onrender.com/api/usuarios";
 //listar usuarios
 export const getUsuarios = async (token: string) => {
     try {
