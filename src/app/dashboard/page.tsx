@@ -86,6 +86,31 @@ const CardsGrid = styled.div`
   gap: 24px;
 `;
 
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoadingWrapper = styled.div`
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+`;
+
+const Spinner = styled.div`
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 4px solid #a0c3ff66;
+  border-top-color: #a0c3ff;
+  animation: ${spin} 0.7s linear infinite;
+`;
+
 // 🧠 Componente principal
 function DashboardContent() {
   const user = useAtomValue(currentUserAtom);
@@ -119,7 +144,17 @@ function DashboardContent() {
     setTimeout(() => setIsFiltering(false), 600);
   };
 
-  if (isLoading) return <p>Cargando espacios...</p>;
+   if (isLoading)
+    return (
+      <Main>
+        <LoadingWrapper>
+          <Spinner />
+          <p style={{ color: "#201f22", fontSize: "0.95rem" }}>
+            Cargando espacios...
+          </p>
+        </LoadingWrapper>
+      </Main>
+    );
   if (error) return <p>Hubo un error al cargar los espacios.</p>;
 
   const displayName =

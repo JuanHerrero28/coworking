@@ -12,7 +12,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import type { EventApi } from "@fullcalendar/core";
 import { AnimatePresence, motion } from "framer-motion";
 import { IoArrowBack } from "react-icons/io5";
@@ -174,6 +174,33 @@ const ModalContent = styled(motion.div)`
   }
 `;
 
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderWrapper = styled.div`
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: ${TEXT_DARK};
+  text-align: center;
+`;
+
+const BigSpinner = styled.div`
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 5px solid ${PRIMARY_COLOR}55;
+  border-top-color: ${PRIMARY_COLOR};
+  animation: ${spin} 0.7s linear infinite;
+`;
+
+
 export default function ReservasPage() {
   const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
@@ -261,8 +288,31 @@ export default function ReservasPage() {
     }
   };
 
-  if (!token || !usuarioId) return <p>Cargando usuario...</p>;
-  if (isLoading) return <p>Cargando reservas...</p>;
+  if (!token || !usuarioId) {
+  return (
+    <PageWrapper>
+      <CalendarStyle />
+      <LoaderWrapper>
+        <BigSpinner />
+        <p>Cargando usuario...</p>
+      </LoaderWrapper>
+      <Footer />
+    </PageWrapper>
+  );
+}
+
+if (isLoading) {
+  return (
+    <PageWrapper>
+      <CalendarStyle />
+      <LoaderWrapper>
+        <BigSpinner />
+        <p>Cargando reservas...</p>
+      </LoaderWrapper>
+      <Footer />
+    </PageWrapper>
+  );
+}
 
   return (
     <>

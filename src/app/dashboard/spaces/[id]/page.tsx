@@ -13,8 +13,31 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/ui/Footer";
+import { keyframes } from "styled-components";
 
 const PRIMARY = "#a0c3ff";
+
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
+
+const LoaderWrapper = styled.div`
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+`;
+
+const BigSpinner = styled.div`
+  width: 60px;
+  height: 60px;
+  border: 6px solid #a0c3ff55;
+  border-top-color: #a0c3ff;
+  border-radius: 50%;
+  animation: ${spin} 0.7s linear infinite;
+`;
 
 /* ================== LAYOUT PRINCIPAL ================== */
 const Container = styled(motion.div)`
@@ -198,7 +221,13 @@ export default function SpaceDetailPage() {
   const [horaFin, setHoraFin] = useState("");
 
   if (!currentUser) return <p>⚠️ Debes iniciar sesión para reservar.</p>;
-  if (isLoading) return <p>Cargando espacio...</p>;
+  if (isLoading)
+  return (
+    <LoaderWrapper>
+      <BigSpinner />
+      <p style={{ color: "#201f22", fontSize: "1rem" }}>Cargando espacio...</p>
+    </LoaderWrapper>
+  );
   if (error) return <p>Ocurrió un error al cargar el espacio.</p>;
   if (!space) return <p>No se encontró el espacio.</p>;
 

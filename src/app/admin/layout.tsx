@@ -54,7 +54,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               Hola, {initials}
             </>
           ) : (
-            "Cargando..."
+            <Spinner/>
           )}
         </Avatar>
 
@@ -170,3 +170,21 @@ const Avatar = styled.div`
   border-radius: 8px;
   padding: 2rem;
 `;
+
+const Spinner = styled.div`
+  width: 22px;
+  height: 22px;
+  border: 3px solid #ffffff90;
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+
+

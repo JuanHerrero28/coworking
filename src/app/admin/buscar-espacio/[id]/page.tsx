@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
 import { authTokenAtom } from "@/context/authAtom";
 import { getSpaceById } from "@/services/makeService";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 interface Space {
   id: number;
@@ -48,8 +48,23 @@ export default function SpaceDetailPageContent({ id }: Props) {
     fetchSpace();
   }, [id, token]);
 
-  if (loading) return <Message>Cargando espacio...</Message>;
-  if (error) return <Message>{error}</Message>;
+   if (loading) {
+    return (
+      <LoaderWrapper>
+        <BigSpinner />
+        <LoadingText>Cargando espacio...</LoadingText>
+      </LoaderWrapper>
+    );
+  }
+
+  if (error) {
+    return <ErrorMessage>{error}</ErrorMessage>;
+  }
+
+  if (!space) {
+    return <ErrorMessage>No se encontraron datos del espacio.</ErrorMessage>;
+  }
+
 
   return (
     <Container>
@@ -103,4 +118,42 @@ const Message = styled.p`
   margin-top: 4rem;
   font-size: 1.2rem;
   color: red;
+`;
+
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderWrapper = styled.div`
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+`;
+
+const BigSpinner = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #a0c3ff55;
+  border-top-color: #a0c3ff;
+  animation: ${spin} 0.7s linear infinite;
+`;
+
+const LoadingText = styled.p`
+  font-size: 1rem;
+  color: #201f22;
+`;
+
+/* Error */
+
+const ErrorMessage = styled.p`
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1rem;
+  color: #c62828;
 `;
